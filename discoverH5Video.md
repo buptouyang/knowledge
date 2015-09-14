@@ -1,9 +1,9 @@
 ###HTML5 Video自动播放调研
-- #####安卓4+改变了play()方法播放的条件，需要用户手势的介入才可以播放视频，让用户知晓他们正在使用带宽提升，用户体验。
-- ######iPhone不支持自动播放，android上UC浏览器支持自动播放，最新版的chrome不支持。
-- ######在android的webview上autoplay自动播放这个特性支持跟设备有关系，和android的版本号没关系，看各个浏览器的实现情况。并且大多数设备都是不能自动播放的。并且loop这个特性也基本上是不支持的。
+#####- 安卓4+改变了play()方法播放的条件，需要用户手势的介入才可以播放视频，让用户知晓他们正在使用带宽提升，用户体验。
+######- iPhone不支持自动播放，android上UC浏览器支持自动播放，最新版的chrome不支持。
+######- 在android的webview上autoplay自动播放这个特性支持跟设备有关系，和android的版本号没关系，看各个浏览器的实现情况。并且大多数设备都是不能自动播放的。并且loop这个特性也基本上是不支持的。
 
-- #####验证了通过setTimeout延时或者以下方式均无效
+#####- 验证了通过setTimeout延时或者以下方式均无效
     myVideo.addEventListener('canplay', function() {
       video_player.play();
 	});
