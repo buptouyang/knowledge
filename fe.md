@@ -191,14 +191,21 @@ call -->string
 #####当浏览器从服务器接收到了HTML文档，并把HTML在内存中转换成DOM树，在转换的过程中如果发现某个节点(node)上引用了CSS或者 IMAGE，就会再发1个request去请求CSS或image,然后继续执行下面的转换，而不需要等待request的返回，当request返回 后，只需要把返回的内容放入到DOM树中对应的位置就OK。但当引用了JS的时候，浏览器发送1个js request就会一直等待该request的返回。因为浏览器需要1个稳定的DOM树结构，而JS中很有可能有代码直接改变了DOM树结构，浏览器为了防止出现JS修改DOM树，需要重新构建DOM树的情况，所以 就会阻塞其他的下载和呈现.
 ###target和currentTarget的区别
 document
+
 |
+
 |--div
+
 |  |
+
 |  |--span
+
 |  |  |
+
 |  |  |--a
+
 当点击a时，a上绑定的所有事件将会被触发，事件会冒泡到父元素，span上的事件被触发，接着div,document。假设span,div的margin,padding,border都是0,当点击链接时，无论是a,span,div上触发的事件，改事件的target属性永远都是a，因为a是事件的起源。而currentTarget属性将会随着冒泡过程改变，它永远是监听事件的元素。
-	<!DOCTYPE html>
+	`<!DOCTYPE html>
 	<html>
 	<head>
 		<title></title>
@@ -246,4 +253,4 @@ document
 	}()); 
 	
 	</script>
-	</html>
+	</html>`
