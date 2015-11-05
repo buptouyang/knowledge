@@ -205,7 +205,7 @@ document
 |  |  |--a
 
 当点击a时，a上绑定的所有事件将会被触发，事件会冒泡到父元素，span上的事件被触发，接着div,document。假设span,div的margin,padding,border都是0,当点击链接时，无论是a,span,div上触发的事件，改事件的target属性永远都是a，因为a是事件的起源。而currentTarget属性将会随着冒泡过程改变，它永远是监听事件的元素。
-	`<!DOCTYPE html>
+	```<!DOCTYPE html>
 	<html>
 	<head>
 		<title></title>
@@ -253,4 +253,4 @@ document
 	}()); 
 	
 	</script>
-	</html>`
+	</html>```
