@@ -189,3 +189,61 @@ call -->string
 ######在引入外部的js文件之后domComplete时间又被延后了，结合renderTree，由于javascript代码可能会更改css属性或者是dom结构，所以在形成renderTree之前必须等待javascript解析完成才能接着构建renderTree。
 ######将javascript放在head内和body底部的区别也在于此，放在head里面，由于浏览器发现head里面有javascript标签就会暂时停止其他渲染行为，等待javascript下载并执行完成才能接着往下渲染，而这个时候由于在head里面这个时候页面是白的，如果将javascript放在页面底部，renderTree已经完成大部分，所以此时页面有内容呈现，即使遇到javascript阻塞渲染，也不会有白屏出现。
 #####当浏览器从服务器接收到了HTML文档，并把HTML在内存中转换成DOM树，在转换的过程中如果发现某个节点(node)上引用了CSS或者 IMAGE，就会再发1个request去请求CSS或image,然后继续执行下面的转换，而不需要等待request的返回，当request返回 后，只需要把返回的内容放入到DOM树中对应的位置就OK。但当引用了JS的时候，浏览器发送1个js request就会一直等待该request的返回。因为浏览器需要1个稳定的DOM树结构，而JS中很有可能有代码直接改变了DOM树结构，浏览器为了防止出现JS修改DOM树，需要重新构建DOM树的情况，所以 就会阻塞其他的下载和呈现.
+###target和currentTarget的区别
+document
+|
+|--div
+|  |
+|  |--span
+|  |  |
+|  |  |--a
+当点击a时，a上绑定的所有事件将会被触发，事件会冒泡到父元素，span上的事件被触发，接着div,document。假设span,div的margin,padding,border都是0,当点击链接时，无论是a,span,div上触发的事件，改事件的target属性永远都是a，因为a是事件的起源。而currentTarget属性将会随着冒泡过程改变，它永远是监听事件的元素。
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+		<style>
+		</style>
+	</head>
+	<body>
+	<div><span><a href="">哈哈</a></span></div>
+	
+	</body>
+	<script>
+	;(function(){
+	
+	  var anchor = document.querySelectorAll( 'a' )[0],
+	      span   = document.querySelectorAll( 'span' )[0],
+	      div    = document.querySelectorAll( 'div' )[0];
+	  
+	  div.addEventListener( 'click', function( e ){
+	    
+	      console.log( e.target, e.currentTarget ); //anchor, div 
+	      e.preventDefault();
+	    
+	  });
+	  
+	  span.addEventListener( 'click', function( e ){
+	       
+	      console.log( e.target, e.currentTarget ); //anchor, span
+	      e.preventDefault();
+	     
+	  });
+	  
+	  anchor.addEventListener( 'click', function( e ){
+	     
+	      console.log( e.target, e.currentTarget ); //anchor, anchor
+	      e.preventDefault();
+	     
+	  });
+	  
+	  document.addEventListener( 'click', function( e ){
+	      
+	      console.log( e.target, e.currentTarget ); //anchor, document
+	      e.preventDefault();
+	  });
+	
+	}()); 
+	
+	</script>
+	</html>
