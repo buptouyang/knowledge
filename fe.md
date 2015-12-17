@@ -254,3 +254,15 @@ document
 	
 	</script>
 	</html>```
+	
+###npm package version 
+#####使用npm insall --save 安装模块
+#####版本号 MAJOR.MINOR.PATCH
+
++ #####MAJOR版本：当你的模块发生与API不兼容的改变
++ #####MINOR版本：当你添加后向兼容的功能
++ #####PATCH版本：当你修改后向兼容的bug
+
+#####~号（tilde）匹配中间的数字，例如~1.2.3将会匹配所有1.2.x版本，但是不会匹配1.3.0。
+#####^号（caret）匹配第一个数字，例如^1.2.3将会匹配所有1.x.x包括1.3.0,但是不会匹配2.0.0
+#####详见[semantic versioning parser](https://github.com/npm/node-semver)
